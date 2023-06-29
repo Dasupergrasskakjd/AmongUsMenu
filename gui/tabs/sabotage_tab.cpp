@@ -43,6 +43,13 @@ namespace SabotageTab {
                 if (ImGui::Button("Sabotage Comms")) {
                     State.rpcQueue.push(new RpcRepairSystem(SystemTypes__Enum::Sabotage, SystemTypes__Enum::Comms));
                 }
+                if (ImGui::Button("One key imp win(30 secs)")) {
+                    ImpWin();
+                }
+                ImGui::SameLine();
+                if (HotKey(State.KeyBinds.Instant_imp_win)){
+                    State.Save();
+                }
 
                 ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
                 ImGui::Separator();

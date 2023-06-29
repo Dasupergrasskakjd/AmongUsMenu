@@ -14,7 +14,9 @@ bool HookFunction(PVOID* ppPointer, PVOID pDetour, const char* functionName) {
 		std::cout << "Failed to hook " << functionName << ", error " << error << std::endl;
 		return false;
 	}
-	//std::cout << "Hooked " << functionName << std::endl;
+	std::cout << "[DEBUG] hook function: ppPointer: " << ppPointer << ", Detour: " << pDetour << std::endl;
+
+	std::cout << "Hooked " << functionName << std::endl;
 	return true;
 }
 

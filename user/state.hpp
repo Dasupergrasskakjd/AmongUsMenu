@@ -20,7 +20,8 @@ public:
         0x00, // toggle zoom
         0x00, // toggle freecam
         0x00, // close current room door
-        VK_END // toggle replay
+        VK_END, // toggle replay
+        0x00 // instant imp win
     };
 
     bool ImGuiInitialized = false;

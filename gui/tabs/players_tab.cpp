@@ -194,6 +194,18 @@ namespace PlayersTab {
 						}
 					}
 
+					if (IsInGame() && PlayerIsImpostor(GetPlayerData(*Game::pLocalPlayer))
+						&& !selectedPlayer.get_PlayerData()->fields.IsDead
+						&& !selectedPlayer.get_PlayerControl()->fields.inMovingPlat)
+					{
+						if (ImGui::Button("Force Kill Player(Might get you kicked)"))
+						{
+							previousPlayerPosition = GetTrueAdjustedPosition(*Game::pLocalPlayer);
+							State.rpcQueue.push(new CmdCheckMurder(State.selectedPlayer));
+							framesPassed = 40;
+						}
+					}
+
 					if (framesPassed == 0)
 					{
 						State.rpcQueue.push(new RpcSnapTo(previousPlayerPosition));

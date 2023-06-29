@@ -17,7 +17,8 @@
 #endif
 
 #undef ASSERT
-#define ASSERT(x)
+#include "logger.h"
+#define ASSERT(x) do{ LOG_ASSERT(x) } while(0)
 
 //////////////////////////////////////////////////////////////////////////////
 //
