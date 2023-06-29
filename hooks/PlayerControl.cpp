@@ -53,7 +53,7 @@ void dPlayerControl_FixedUpdate(PlayerControl* __this, MethodInfo* method) {
 	if (IsInGame()) {
 		auto playerData = GetPlayerData(__this);
 		auto localData = GetPlayerData(*Game::pLocalPlayer);
-		assert(Object_1_IsNotNull((Object_1*)__this->fields.cosmetics));
+		LOG_ASSERT(Object_1_IsNotNull((Object_1*)__this->fields.cosmetics));
 		auto nameTextTMP = __this->fields.cosmetics->fields.nameText;
 
 		if (!playerData || !localData)

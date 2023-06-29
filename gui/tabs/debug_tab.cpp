@@ -9,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include "gui-helpers.hpp"
+#include "il2cpp-helpers.h"
 
 namespace DebugTab {
 
@@ -32,6 +33,18 @@ namespace DebugTab {
 			if (ImGui::Button("Force Save Settings"))
 			{
 				State.Save();
+			}
+			if (ImGui::Button("Get assembly-csharp methods(Look at console)"))
+			{
+				Il2CppDomain* domain = il2cpp_domain_get();
+				const Il2CppAssembly* assembly = il2cpp_domain_assembly_open(domain, "Assembly-CSharp");
+				output_assembly_methods(assembly);
+			}
+			if (ImGui::Button("Get unityengine.coremodule methods(Look at console)"))
+			{
+				Il2CppDomain* domain = il2cpp_domain_get();
+				const Il2CppAssembly* assembly = il2cpp_domain_assembly_open(domain, "UnityEngine.CoreModule");
+				output_assembly_methods(assembly);
 			}
 
 			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
