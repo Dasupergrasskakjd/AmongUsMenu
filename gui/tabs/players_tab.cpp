@@ -83,6 +83,14 @@ namespace PlayersTab {
 						State.rpcQueue.push(new RpcReportPlayer(State.selectedPlayer));
 					}
 				}
+				if (selectedPlayer.has_value() && IsHost() && !selectedPlayer.is_LocalPlayer()) {
+					auto playerData = selectedPlayer.get_PlayerData();
+					auto playerName = convert_from_string(app::GameData_PlayerInfo_get_PlayerName(playerData, NULL)).c_str();
+					char* nameBuffer[12]{ const_cast<char*>(playerName) };
+					if (ImGui::InputText("PlayerName", *nameBuffer, IM_ARRAYSIZE(nameBuffer))) {
+						app::PlayerControl_CmdCheckName(selectedPlayer.get_PlayerControl(), convert_to_string(*nameBuffer), NULL);
+					}
+				}
 				if (State.activeImpersonation)
 				{
 					if (ImGui::Button("Reset Impersonation"))

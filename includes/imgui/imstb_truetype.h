@@ -474,8 +474,8 @@ int main(int arg, char **argv)
    #endif
 
    #ifndef STBTT_assert
-   #include "logger.h"
-   #define STBTT_assert(x)    LOG_ASSERT(x)
+   #include <assert.h>
+   #define STBTT_assert(x)    assert(x)
    #endif
 
    #ifndef STBTT_strlen

@@ -286,7 +286,7 @@ HRESULT __stdcall dPresent(IDXGISwapChain* __this, UINT SyncInterval, UINT Flags
     if (!pRenderTargetView) {
         ID3D11Texture2D* pBackBuffer = nullptr;
         __this->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
-        LOG_ASSERT(pBackBuffer);
+        assert(pBackBuffer);
         pDevice->CreateRenderTargetView(pBackBuffer, nullptr, &pRenderTargetView);
         pBackBuffer->Release();
 
@@ -381,10 +381,10 @@ HRESULT __stdcall dPresent(IDXGISwapChain* __this, UINT SyncInterval, UINT Flags
 }
 
 void DirectX::Shutdown() {
-    LOG_ASSERT(hRenderSemaphore != NULL); //Initialization is now in a hook, so we might as well guard against this
+    assert(hRenderSemaphore != NULL); //Initialization is now in a hook, so we might as well guard against this
     for (uint8_t i = 0; i < MAX_RENDER_THREAD_COUNT; i++) //This ugly little hack means we use up all the render queues so we can end everything
     {
-        LOG_ASSERT(WaitForSingleObject(hRenderSemaphore, INFINITE) == WAIT_OBJECT_0); //Since this is only used on debug builds, we'll leave this for now
+        assert(WaitForSingleObject(hRenderSemaphore, INFINITE) == WAIT_OBJECT_0); //Since this is only used on debug builds, we'll leave this for now
     }
     oWndProc = (WNDPROC)SetWindowLongPtr(window, GWLP_WNDPROC, (LONG_PTR)oWndProc);
     ImGui_ImplDX11_Shutdown();
